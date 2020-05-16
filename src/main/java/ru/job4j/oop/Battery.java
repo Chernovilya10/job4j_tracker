@@ -8,13 +8,13 @@ public class Battery {
     }
 
     public void exchange(Battery another) {
-        this.loan = this.loan - 20;             //списываем у объекта, вызвавшего метод 20% заряда
-        another.loan = another.loan + 20;       //прибавляем, объекту который передали в метод 20%
+        this.loan = 0;                                 //списываем у объекта, вызвавшего метод
+        another.loan = another.loan + this.loan;       //прибавляем, объекту который передали
     }
 
     public static void main(String[] args) {
-        Battery samsung = new Battery(80);
-        Battery apple = new Battery(30);
+        Battery samsung = new Battery(30);
+        Battery apple = new Battery(60);
         System.out.println("Status of the battery " + " samsung: " + samsung.loan + " apple: " + apple.loan);
         samsung.exchange(apple);
         System.out.println("Status of the battery " + " samsung: " + samsung.loan + " apple: " + apple.loan);
