@@ -8,8 +8,8 @@ public class Battery {
     }
 
     public void exchange(Battery another) {
-        this.loan = 0;                                 //списываем у объекта, вызвавшего метод
         another.loan = another.loan + this.loan;       //прибавляем, объекту который передали
+        this.loan = 0;                                 //списываем у объекта, вызвавшего метод
     }
 
     public static void main(String[] args) {
