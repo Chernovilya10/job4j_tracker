@@ -9,9 +9,9 @@ public class MaxTest {
 
     @Test
     public void firstMethodMax() {
-        int left = 1;
-        int right = 2;
-        int rst = Max.max(left, right);
+        int first = 1;
+        int second = 2;
+        int rst = Max.max(first, second);
         int expect = 2;
         assertThat(rst, is(expect));
     }
