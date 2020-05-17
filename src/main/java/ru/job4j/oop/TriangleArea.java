@@ -63,8 +63,7 @@ public class TriangleArea {
      * @return возвращает булево значение: может ли существовать треугольник с такими сторонами или нет
      */
     public boolean exist(double ab, double ac, double bc) {
-        boolean rst = (ab + ac) > bc && (ac + bc) > ab && (bc + ab) > ac ? true : false;
-        return rst;
+        return (ab + ac) > bc && (ac + bc) > ab && (bc + ab) > ac;
     }
 
     /**
