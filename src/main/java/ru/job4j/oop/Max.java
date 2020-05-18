@@ -8,18 +8,20 @@ public class Max {
     }
 
     public int max(int first, int second, int third) {
-        int rst = max(first, second);
-        if (rst < third) {
-            rst = third;
-        }
-        return rst;
+//        int rst = max(first, second);
+//        if (rst < third) {
+//            rst = third;
+//        }
+//        return rst;
+        return max(first, max(second, third));
     }
 
     public int max(int first, int second, int third, int forth) {
-        int rst = max(first, second, third);
-        if (rst < forth) {
-            rst = forth;
-        }
-        return rst;
+//        int rst = max(first, second, third);
+//        if (rst < forth) {
+//            rst = forth;
+//        }
+//        return rst;
+        return max(first, max(second, third, forth));
     }
 }
