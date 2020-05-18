@@ -16,11 +16,14 @@ public class Animal {
 
     public Animal(String name) {
         this.name = name;
+        System.out.println("Animal");
+        System.out.println(name);
     }
 
     public static void main(String[] args) {
         Tiger tiger1 = new Tiger();               //Исп-ем конструктор без параметров
-        Tiger tiger = new Tiger("Big Cat"); //Дали имя тигру через конструктор с параметром типа String
-        System.out.println("Name of the tiger is " + tiger.name);
+//        Tiger tiger = new Tiger("Big Cat"); //Дали имя тигру через конструктор с параметром типа String
+//        System.out.println("Name of the tiger is " + tiger.name);
+        Tiger tiger2 = new Tiger("Big Cat");            //Исп-ем конструктор с параметром типа String
     }
 }
