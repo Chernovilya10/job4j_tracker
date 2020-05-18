@@ -1,6 +1,7 @@
 package ru.job4j.oop;
 
 public class Animal {
+    public String name;     //Исп-ся мод-р public чтобы можно было вывести имя тигра без исп-я сеттеров и геттеров
     /**
      * public Animal() - конструктор класса Animal без параметров
      * Родительским классом является класс Object
@@ -12,7 +13,14 @@ public class Animal {
         super();
         System.out.println("Animal");
     }
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
     public static void main(String[] args) {
-        Tiger tiger = new Tiger();
+        Tiger tiger1 = new Tiger();               //Исп-ем конструктор без параметров
+        Tiger tiger = new Tiger("Big Cat"); //Дали имя тигру через конструктор с параметром типа String
+        System.out.println("Name of the tiger is " + tiger.name);
     }
 }
