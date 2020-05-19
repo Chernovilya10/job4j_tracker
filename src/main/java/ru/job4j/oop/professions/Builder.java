@@ -1,13 +1,13 @@
 package ru.job4j.oop.professions;
 
-public class Builder extends Engineer{
+public class Builder extends Engineer {
     private String specialization;      //проектирование или стройка
 
     /**
      * Method projection - позволяет вернуть наименование разработанного проекта
      * @return - возвращает какой раздел проекта выполняется
      */
-    public String projection() {
+    public String projection(Project project) {
         return "Раздел проекта";
     }
     /**
