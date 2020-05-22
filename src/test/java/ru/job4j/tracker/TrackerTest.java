@@ -13,6 +13,7 @@ public class TrackerTest {
         Item result = tracker.findById(item.getId());
         assertThat(result.getName(), is(item.getName()));
     }
+
     @Test
     public void whenAddNewArrayOfItemThenTrackerHasName() {
         Tracker tracker = new Tracker();
@@ -45,5 +46,16 @@ public class TrackerTest {
         Item[] result = tracker.findAll();
         Item[] expect = {item1, item2, item3, item4, item5};
         assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenReplace() {
+        Tracker tracker = new Tracker();
+        Item bug = new Item("Bug");
+        tracker.add(bug);
+        Item bigBug = new Item("Big bug");
+        String id = bug.getId();
+        tracker.replace(id, bigBug);
+        assertThat(tracker.findById(id).getName(), is("Big bug"));
     }
 }

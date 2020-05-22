@@ -70,15 +70,38 @@ public class Tracker {
         return Arrays.copyOf(itemsWithEqualsName, size);
     }
 
+    /**
+     * findById - метод используется для поиска модели по номеру Id.
+     * @return - возвращает модель с найденным Id.
+     */
     public Item findById(String id) {
-        Item rsl = null;
-        for (int i = 0; i < position; i++) {        //использую position, т.к. макс кол-во эл-ов в массиве items будет равно position
-            Item it = items[i];
-            if (it.getId().equals(id)) {
-                rsl = it;
+        int index = indexOf(id);
+        Item item = items[index];
+        return index != -1 ? item : null;
+    }
+
+    /**
+     * indexOf - метод используется для поиска индекса эл-та массива с заданным Id.
+     * @return - индекс эл-та массива.
+     */
+    private int indexOf(String id) {
+        int rst = -1;
+        for (int index = 0; index < position; index++) {
+            if (items[index].getId().equals(id)) {
+                rst = index;
                 break;
             }
         }
-        return rsl;
+        return rst;
+    }
+
+    /**
+     * replace - метод используется для замены эл-та с заданным Id новой моделью с сохранением Id.
+     * @return - булево значение от сравнения Id новой модели и заменнной.
+     */
+    public boolean replace(String id, Item item) {
+        items[indexOf(id)] = item;  //заменяем модель c указанным id моделью, которую передаем вторым параметром (у передаваемой модели нет id, т.к. для нее мы не генерировали Id)
+        item.setId(id);             //передаем Id от замененной модели, т.е. Id у эл-та, который заменили, остался
+        return item.getId().equals(id);
     }
 }
