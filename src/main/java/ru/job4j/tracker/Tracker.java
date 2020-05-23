@@ -106,9 +106,12 @@ public class Tracker {
      * @return - булево значение от сравнения Id новой модели и заменнной.
      */
     public boolean replace(String id, Item item) {
-        items[indexOf(id)] = item;  //заменяем модель c указанным id моделью, которую передаем вторым параметром (у передаваемой модели нет id, т.к. для нее мы не генерировали Id)
-        item.setId(id);             //передаем Id от замененной модели, т.е. Id у эл-та, который заменили, остался
-        return item.getId().equals(id);
+        boolean rst = indexOf(id) != -1;        //производим валидацию, индекс не должен быть равен -1.
+        if (rst) {
+            items[indexOf(id)] = item;  //заменяем модель c указанным id моделью, которую передаем вторым параметром (у передаваемой модели нет id, т.к. для нее мы не генерировали Id)
+            item.setId(id);             //передаем Id от замененной модели, т.е. Id у эл-та, который заменили, остался
+        }
+        return rst;
     }
 
     /**
@@ -121,13 +124,16 @@ public class Tracker {
      */
     public boolean delete(String id) {
         int index = indexOf(id);
-        items[index] = null;              //присваиваем ячейке значение null
-        int startPos = index + 1;            //значение индекса, с которого необх. копировать массив
-        int distPos = index;               //значение индекса куда нужно вставлять массив
-        int size = position - startPos;      //количесво эл-ов массива нужно скопировать, начиная от startPos
-        System.arraycopy(items, startPos, items, distPos, size);
-        items[position - 1] = null;       //здесь мы присваиваем последнему элементу значение null, т.к. его переместили влево
-        position--;
-        return id != items[0].getId();
+        boolean rst = index != -1;        //производим валидацию, индекс не должен быть равен -1.
+        if (rst) {
+            items[index] = null;              //присваиваем ячейке значение null
+            int startPos = index + 1;            //значение индекса, с которого необх. копировать массив
+            int distPos = index;               //значение индекса куда нужно вставлять массив
+            int size = position - startPos;      //количесво эл-ов массива нужно скопировать, начиная от startPos
+            System.arraycopy(items, startPos, items, distPos, size);
+            items[position - 1] = null;       //здесь мы присваиваем последнему элементу значение null, т.к. его переместили влево
+            position--;
+        }
+        return rst;
     }
 }
