@@ -48,8 +48,8 @@ public class Shop {
 //            }
 //
         Product[] products1 = new Product[5];
-        products1[1] = new Product("Milk", 10);
-        products1[2] = new Product("Bread", 4);
+        products1[0] = new Product("Milk", 10);
+        products1[1] = new Product("Bread", 4);
         products1[3] = new Product("Egg", 19);
         products1[4] = new Product("Melon", 6);
         for (int i = 0; i < products1.length; i++) {
@@ -63,7 +63,7 @@ public class Shop {
 
         System.out.println(System.lineSeparator() + "Сдвигаем все элементы массива влево на одну позицию");
         Shop shop = new Shop();
-        Product[] s = shop.delete(products1, 4);    //закидываем в метод массив и индекс последнего элемента
+        Product[] s = shop.delete(products1, 2);    //закидываем в метод массив и индекс последнего элемента
         for (Product pr : s) {
             if (pr != null) {
                 System.out.println(pr.getName());
@@ -74,7 +74,7 @@ public class Shop {
     }
 
     public Product[] delete(Product[] products, int index) {
-        for (int i = 0; i < index; i++) {
+        for (int i = index; i < products.length - 1; i++) {
             products[i] = products[i + 1];
         }
         products[products.length - 1] = null;
