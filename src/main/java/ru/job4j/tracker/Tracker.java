@@ -127,7 +127,7 @@ public class Tracker {
         int index = indexOf(id);
         boolean rst = index != -1;        //производим валидацию, индекс не должен быть равен -1.
         if (rst) {
-            items[index] = null;              //присваиваем ячейке значение null
+//            items[index] = null;              //присваиваем ячейке значение null
             int startPos = index + 1;            //значение индекса, с которого необх. копировать массив
             int distPos = index;               //значение индекса куда нужно вставлять массив
             int size = position - startPos;      //количесво эл-ов массива нужно скопировать, начиная от startPos
