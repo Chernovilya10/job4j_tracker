@@ -40,16 +40,17 @@ public class Tracker {
      * @return - возвращает копию массива this.itemsбез элементов null
      */
     public Item[] findAll() {
-        Item[] itemsWithOutNull = new Item[position];
-        int size = 0;
-        for (int i = 0; i < position; i++) {    //использую position, т.к. макс кол-во эл-ов в массиве items будет равно position
-            Item it = items[i];
-            if (it != null) {
-                itemsWithOutNull[size] = it;
-                size++;
-            }
-        }
-        return Arrays.copyOf(itemsWithOutNull, size);
+//        Item[] itemsWithOutNull = new Item[position];
+//        int size = 0;
+//        for (int i = 0; i < position; i++) {    //использую position, т.к. макс кол-во эл-ов в массиве items будет равно position
+//            Item it = items[i];
+//            if (it != null) {
+//                itemsWithOutNull[size] = it;
+//                size++;
+//            }
+//        }
+//        return Arrays.copyOf(itemsWithOutNull, size);
+    return Arrays.copyOf(items, position);
     }
 
     /**
