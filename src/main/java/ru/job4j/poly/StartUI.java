@@ -5,6 +5,10 @@ import ru.job4j.tracker.Tracker;
 
 import java.util.Scanner;
 
+/**
+ * Данный класс позволяет нам работать с классом Scanner, для выполнения методов класса Tracker с помощью обращения пользователя
+ * через консоль.
+ */
 public class StartUI {
 
     public void init(Scanner scanner, Tracker tracker) {
