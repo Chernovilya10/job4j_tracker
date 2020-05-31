@@ -1,9 +1,4 @@
-package ru.job4j.poly;
-
-import ru.job4j.tracker.ConsoleInput;
-import ru.job4j.tracker.Input;
-import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Tracker;
+package ru.job4j.tracker;
 
 /**
  * Данный класс позволяет нам работать с классом Scanner, через интрефейс Input, для выполнения методов класса Tracker
@@ -56,7 +51,11 @@ public class StartUI {
         System.out.println("==== Find item by Id ====");
         String id = input.askString("Please enter Id");
         Item findById = tracker.findById(id);
-        System.out.println("Name: " + findById.getName() + "; " + "Id: " + findById.getId());
+        if (findById != null) {
+            System.out.println("Name: " + findById.getName() + "; " + "Id: " + findById.getId());
+        } else {
+            System.out.println("Object not found.");
+        }
     }
 
     public static void findItemsByName(Input input, Tracker tracker) {
@@ -96,8 +95,6 @@ public class StartUI {
                 StartUI.findItemsByName(input, tracker);
             } else if (select == 6) {
                 run = StartUI.exit();
-            } else if (select < 0 && select > 6) {
-                System.out.println("Repeat again.");
             }
         }
     }
