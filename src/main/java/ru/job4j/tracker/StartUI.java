@@ -5,6 +5,11 @@ package ru.job4j.tracker;
  * с помощью обращения пользователя через консоль.
  */
 public class StartUI {
+    private final Output out;
+
+    public StartUI(Output out) {
+        this.out = out;
+    }
 
 //    public static void createItem(Input input, Tracker tracker) {
 //        System.out.println("==== Create a new Item ====");
@@ -85,7 +90,7 @@ public class StartUI {
                 UserAction action = actions[select];
                 run = action.execute(input, tracker);
             } else {
-                System.out.println("Enter the correct menu number.");
+                out.println("Enter the correct menu number.");
             }
 //            if (select == 0) {
 //                StartUI.createItem(input, tracker);
@@ -106,9 +111,9 @@ public class StartUI {
     }
 
     private void showMenu(UserAction[] actions) {
-        System.out.println("Menu.");
+        out.println("Menu.");
         for (int i = 0; i < actions.length; i++) {
-            System.out.println(i + ". " + actions[i].name());
+            out.println(i + ". " + actions[i].name());
         }
 //        System.out.println("0. Add new Item");
 //        System.out.println("1. Show all items");
@@ -120,20 +125,21 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
+        Output output = new ConsoleOutput();
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
         //Добавили массив типа интерфейса UserAction. Элементы массива используются для передачи в метод init,
         // в котором используем метод showMenu для показа всего меню и обращаемся к методам классов, реализующих интерфейс UserAction
         UserAction[] actions = {
-                new CreateAction(),
-                new ShowAction(),
-                new EditAction(),
-                new DeleteAction(),
-                new FindByIdAction(),
-                new FindByNameAction(),
-                new ExitAction()
+                new CreateAction(output),
+                new ShowAction(output),
+                new EditAction(output),
+                new DeleteAction(output),
+                new FindByIdAction(output),
+                new FindByNameAction(output),
+                new ExitAction(output)
         };
-        StartUI startUI = new StartUI();
+        StartUI startUI = new StartUI(output);
         startUI.init(input, tracker, actions);
     }
 }

@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 public class StartUITest {
     @Test
     public void whenCreateAction() {
+        Output output = new ConsoleOutput();
         String[] answers = {
                 "0",
                 "Name",
@@ -16,15 +17,16 @@ public class StartUITest {
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
         UserAction[] actions = {
-                new CreateAction(),
-                new ExitAction()
+                new CreateAction(output),
+                new ExitAction(output)
         };
-        StartUI startUI = new StartUI();
+        StartUI startUI = new StartUI(output);
         startUI.init(input, tracker, actions);
         assertThat(tracker.findAll()[0].getName(), is("Name"));
     }
     @Test
     public void whenEditAction() {
+        Output output = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = new Item("Name");
         tracker.add(item);
@@ -35,16 +37,17 @@ public class StartUITest {
                 "1"};
         Input input = new StubInput(answers);
         UserAction[] actions = {
-                new EditAction(),
-                new ExitAction()
+                new EditAction(output),
+                new ExitAction(output)
         };
-        StartUI startUI = new StartUI();
+        StartUI startUI = new StartUI(output);
         startUI.init(input, tracker, actions);
         assertThat(tracker.findById(item.getId()).getName(), is("New Name"));
     }
 
     @Test
     public void whenDeleteAction() {
+        Output output = new ConsoleOutput();
         Tracker tracker = new Tracker();
         Item item = new Item("Name");
         tracker.add(item);
@@ -54,13 +57,14 @@ public class StartUITest {
                 "1"};
         Input input = new StubInput(answers);
         UserAction[] actions = {
-                new DeleteAction(),
-                new ExitAction()
+                new DeleteAction(output),
+                new ExitAction(output)
         };
-        StartUI startUI = new StartUI();
+        StartUI startUI = new StartUI(output);
         startUI.init(input, tracker, actions);
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
+
 
 
 
