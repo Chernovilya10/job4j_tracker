@@ -7,6 +7,62 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
 
 public class StartUITest {
+    @Test
+    public void whenCreateAction() {
+        String[] answers = {
+                "0",
+                "Name",
+                "1"};
+        Input input = new StubInput(answers);
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new CreateAction(),
+                new ExitAction()
+        };
+        StartUI startUI = new StartUI();
+        startUI.init(input, tracker, actions);
+        assertThat(tracker.findAll()[0].getName(), is("Name"));
+    }
+    @Test
+    public void whenEditAction() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("Name");
+        tracker.add(item);
+        String[] answers = {
+                "0",
+                item.getId(),
+                "New Name",
+                "1"};
+        Input input = new StubInput(answers);
+        UserAction[] actions = {
+                new EditAction(),
+                new ExitAction()
+        };
+        StartUI startUI = new StartUI();
+        startUI.init(input, tracker, actions);
+        assertThat(tracker.findById(item.getId()).getName(), is("New Name"));
+    }
+
+    @Test
+    public void whenDeleteAction() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("Name");
+        tracker.add(item);
+        String[] answers = {
+                "0",
+                item.getId(),
+                "1"};
+        Input input = new StubInput(answers);
+        UserAction[] actions = {
+                new DeleteAction(),
+                new ExitAction()
+        };
+        StartUI startUI = new StartUI();
+        startUI.init(input, tracker, actions);
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
+    }
+
+
 
 //    @Test
 //    public void whenAddItem() {
