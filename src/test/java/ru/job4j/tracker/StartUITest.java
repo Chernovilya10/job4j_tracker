@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class StartUITest {
     @Test
     public void whenCreateAction() {
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         String[] answers = {
                 "0",
                 "Name",
@@ -28,7 +28,7 @@ public class StartUITest {
 
     @Test
     public void whenEditAction() {
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         Tracker tracker = new Tracker();
         Item item = new Item("Name");
         tracker.add(item);
@@ -49,7 +49,7 @@ public class StartUITest {
 
     @Test
     public void whenDeleteAction() {
-        Output output = new ConsoleOutput();
+        Output output = new StubOutput();
         Tracker tracker = new Tracker();
         Item item = new Item("Name");
         tracker.add(item);
