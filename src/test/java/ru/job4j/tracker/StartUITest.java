@@ -215,7 +215,6 @@ public class StartUITest {
         Output output = new StubOutput();
         Input input = new StubInput(new String[] {
                 "7",
-                "qwe",
                 "0"
                 }
         );
