@@ -86,13 +86,13 @@ public class StartUI {
         while (run) {
             this.showMenu(actions);
             int select = input.askInt("Select:");
-            if (select >= 0 && select <= 6) {       //Валидация если напишем в консоле введем число <0 или >6
-                UserAction action = actions[select];
-                run = action.execute(input, tracker);
-            } else {
-                out.println("Enter the correct menu number.");
+            if (select < 0 || select >= actions.length) {       //Валидация если напишем в консоле введем число <0 или >6
+                out.println("Wrong input, you can select: 0 .. " + (actions.length - 1));
+                continue;
             }
-//            if (select == 0) {
+            UserAction action = actions[select];
+            run = action.execute(input, tracker);
+            //            if (select == 0) {
 //                StartUI.createItem(input, tracker);
 //            } else if (select == 1) {
 //                StartUI.showAllItems(tracker);
@@ -126,7 +126,7 @@ public class StartUI {
 
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         Tracker tracker = new Tracker();
         //Добавили массив типа интерфейса UserAction. Элементы массива используются для передачи в метод init,
         // в котором используем метод showMenu для показа всего меню и обращаемся к методам классов, реализующих интерфейс UserAction
