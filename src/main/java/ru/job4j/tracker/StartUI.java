@@ -126,7 +126,7 @@ public class StartUI {
 
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
-        Input input = new ValidateInput();
+        Input input = new ValidateInput(output, new ConsoleInput());
         Tracker tracker = new Tracker();
         //Добавили массив типа интерфейса UserAction. Элементы массива используются для передачи в метод init,
         // в котором используем метод showMenu для показа всего меню и обращаемся к методам классов, реализующих интерфейс UserAction
