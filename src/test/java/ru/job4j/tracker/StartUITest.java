@@ -209,6 +209,48 @@ public class StartUITest {
                 + "Bye bye." + System.lineSeparator()
         ));
     }
+
+    @Test
+    public void whenInvalidExit() {
+        Output output = new StubOutput();
+        Input input = new StubInput(new String[] {
+                "7",
+                "qwe",
+                "0"
+                }
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new ExitAction(output)
+        };
+        StartUI startUI = new StartUI(output);
+        startUI.init(input, tracker, actions);
+        assertThat(output.toString(), is(
+                String.format(
+                        "Menu.%n"
+                        + "0. Exit Program%n"
+                        + "Wrong input, you can select: 0 .. 0%n"
+                        + "Menu.%n"
+                        + "0. Exit Program%n"
+                        + "Bye bye.%n"
+                )
+        ));
+    }
+
+    @Test (expected = NumberFormatException.class)
+    public void whenSelectTextThenInvalidExit() {
+        Output output = new StubOutput();
+        Input input = new StubInput(new String[] {
+                "uuu"
+        }
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new ExitAction(output)
+        };
+        StartUI startUI = new StartUI(output);
+        startUI.init(input, tracker, actions);
+    }
 }
 
 //    @Test
