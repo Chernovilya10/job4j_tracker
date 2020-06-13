@@ -19,13 +19,19 @@ public class UserStore {
     }
 
     public static boolean validate(User user) throws UserInvalidException {
-        boolean rst = false;
-        if (user.isValid() && user.getUserName().length() > 3) {
-            rst = true;
+        boolean rst1;
+        boolean rst2;
+        if (user.isValid()) {
+            rst1 = true;
         } else {
-            throw new UserInvalidException("Invalid username or username is less than three symbols");
+            throw new UserInvalidException("Invalid username");
         }
-        return rst;
+        if (user.getUserName().length() > 3) {
+            rst2 = true;
+        } else {
+            throw new UserInvalidException("Username is less than three symbols");
+        }
+        return rst1 && rst2;
     }
 
     public static void main(String[] args) {
