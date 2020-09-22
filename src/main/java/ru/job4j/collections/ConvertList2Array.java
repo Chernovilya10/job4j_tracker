@@ -18,10 +18,8 @@ public class ConvertList2Array {
         int cell = 0;
             for (Integer num : list) {
                 array[row][cell] = num;
-                if (cell <= cells) {
-                    cell++;
-                }
-                if (cell == cells && row <= groups) {
+                cell++;
+                if (cell == cells) {
                     cell = 0;
                     row++;
                 }
