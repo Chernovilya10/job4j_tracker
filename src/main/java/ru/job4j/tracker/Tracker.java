@@ -1,11 +1,12 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Tracker {
-    private final Item[] items = new Item[100];
-    private int position = 0;
+    private final List<Item> items = new ArrayList<>();
 
     /**
      * add - Метод добавляет в массив this.items модель с новым случайно сгенерированным уник. ключом.
@@ -15,7 +16,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(generateId());
-        items[position++] = item;
+        items.add(item);
         return item;
     }
 
@@ -37,9 +38,9 @@ public class Tracker {
      * Далее перебираем не null эл-ты массива items и записываем по очереди в новый массив.
      * Arrays.copyOf(itemsWithOutNull, size) - обрезаем новый массив до того количества эл-ов, которые были переданы, чтобы избавиться от null элементов.
      *
-     * @return - возвращает копию массива this.itemsбез элементов null
+     * @return - возвращает копию массива this.items без элементов null
      */
-    public Item[] findAll() {
+        public List<Item> findAll() {
 //        Item[] itemsWithOutNull = new Item[position];
 //        int size = 0;
 //        for (int i = 0; i < position; i++) {    //использую position, т.к. макс кол-во эл-ов в массиве items будет равно position
@@ -50,8 +51,8 @@ public class Tracker {
 //            }
 //        }
 //        return Arrays.copyOf(itemsWithOutNull, size);
-    return Arrays.copyOf(items, position);
-    }
+        return this.items;
+        }
 
     /**
      * findName - метод используется для возврата копии массива this.items c совпадающим заданным именем.
@@ -63,12 +64,11 @@ public class Tracker {
      */
 
     public Item[] findName(String key) {
-        Item[] itemsWithEqualsName = new Item[position];
+        Item[] itemsWithEqualsName = new Item[items.size()];
         int size = 0;
-        for (int i = 0; i < position; i++) {    //использую position, т.к. макс кол-во эл-ов в массиве items будет равно position
-            Item it = items[i];
-            if (it.getName().equals(key)) {
-                itemsWithEqualsName[size] = it;
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getName().equals(key)) {
+                itemsWithEqualsName[size] = items.get(i);
                 size++;
             }
         }
@@ -82,7 +82,7 @@ public class Tracker {
      */
     public Item findById(String id) {
         int index = indexOf(id);
-        return index != -1 ? items[index] : null;
+        return index != -1 ? items.get(index) : null;
     }
 
     /**
@@ -92,8 +92,8 @@ public class Tracker {
      */
     private int indexOf(String id) {
         int rst = -1;
-        for (int index = 0; index < position; index++) {
-            if (items[index].getId().equals(id)) {
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
                 rst = index;
                 break;
             }
@@ -110,8 +110,9 @@ public class Tracker {
         int index = indexOf(id);
         boolean rst = index != -1;        //производим валидацию, индекс не должен быть равен -1.
         if (rst) {
-            items[index] = item;  //заменяем модель c указанным id моделью, которую передаем вторым параметром (у передаваемой модели нет id, т.к. для нее мы не генерировали Id)
-            item.setId(id);             //передаем Id от замененной модели, т.е. Id у эл-та, который заменили, остался
+        item.setId(id);                //передаем Id от замененной модели, т.е. Id у эл-та, который заменили, остался
+        items.set(index, item);      //метод set позволяет заменить ячейку в коллекции. Далее мы передаем уже новому эл-ту старый Id
+
         }
         return rst;
     }
@@ -128,13 +129,7 @@ public class Tracker {
         int index = indexOf(id);
         boolean rst = index != -1;        //производим валидацию, индекс не должен быть равен -1.
         if (rst) {
-//            items[index] = null;              //присваиваем ячейке значение null
-            int startPos = index + 1;            //значение индекса, с которого необх. копировать массив
-            int distPos = index;               //значение индекса куда нужно вставлять массив
-            int size = position - startPos;      //количесво эл-ов массива нужно скопировать, начиная от startPos
-            System.arraycopy(items, startPos, items, distPos, size);
-            items[position - 1] = null;       //здесь мы присваиваем последнему элементу значение null, т.к. его переместили влево
-            position--;
+            items.remove(index);
         }
         return rst;
     }

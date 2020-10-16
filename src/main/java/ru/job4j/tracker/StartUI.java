@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Данный класс позволяет нам работать с классом Scanner, через интрефейс Input, для выполнения методов класса Tracker
  * с помощью обращения пользователя через консоль.
@@ -81,18 +84,21 @@ public class StartUI {
 //        return false;
 //    }
 
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Tracker tracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
             int select = input.askInt("Select:");
-            if (select < 0 || select >= actions.length) {       //Валидация если напишем в консоле введем число <0 или >6
-                out.println("Wrong input, you can select: 0 .. " + (actions.length - 1));
-                continue;
+            if (select < 0 || select >= actions.size()) {
+                out.println("Wrong input, you can select: 0 .. " + (actions.size() - 1));
+                    continue;
+                }
+                UserAction action = actions.get(select);
+                run = action.execute(input, tracker);
             }
-            UserAction action = actions[select];
-            run = action.execute(input, tracker);
-            //            if (select == 0) {
+    }
+
+//            if (select == 0) {
 //                StartUI.createItem(input, tracker);
 //            } else if (select == 1) {
 //                StartUI.showAllItems(tracker);
@@ -107,13 +113,11 @@ public class StartUI {
 //            } else if (select == 6) {
 //                run = StartUI.exit();
 //            }
-        }
-    }
 
-    private void showMenu(UserAction[] actions) {
+    private void showMenu(List<UserAction> actions) {
         out.println("Menu.");
-        for (int i = 0; i < actions.length; i++) {
-            out.println(i + ". " + actions[i].name());
+        for (int i = 0; i < actions.size(); i++) {
+            out.println(i + ". " + actions.get(i).name());
         }
 //        System.out.println("0. Add new Item");
 //        System.out.println("1. Show all items");
@@ -128,17 +132,17 @@ public class StartUI {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
         Tracker tracker = new Tracker();
-        //Добавили массив типа интерфейса UserAction. Элементы массива используются для передачи в метод init,
+        //Добавили коллекцию типа интерфейса UserAction. Элементы коллекции используются для передачи в метод init,
         // в котором используем метод showMenu для показа всего меню и обращаемся к методам классов, реализующих интерфейс UserAction
-        UserAction[] actions = {
-                new CreateAction(output),
-                new ShowAction(output),
-                new EditAction(output),
-                new DeleteAction(output),
-                new FindByIdAction(output),
-                new FindByNameAction(output),
-                new ExitAction(output)
-        };
+        List<UserAction> actions = new ArrayList<>();
+        actions.add(new CreateAction(output));
+        actions.add(new ShowAction(output));
+        actions.add(new EditAction(output));
+        actions.add(new DeleteAction(output));
+        actions.add(new FindByIdAction(output));
+        actions.add(new FindByNameAction(output));
+        actions.add(new ExitAction(output));
+
         StartUI startUI = new StartUI(output);
         startUI.init(input, tracker, actions);
     }
