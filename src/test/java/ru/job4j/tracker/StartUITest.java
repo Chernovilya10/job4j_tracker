@@ -21,17 +21,12 @@ public class StartUITest {
                 "1"};
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
-//        UserAction[] actions = {
-//                new CreateAction(output),
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new CreateAction(output));
         actions.add(new ExitAction(output));
 
         StartUI startUI = new StartUI(output);
         startUI.init(input, tracker, actions);
-//        assertThat(tracker.findAll()[0].getName(), is("Name"));
         assertThat(tracker.findAll().get(0).getName(), is("Name"));
     }
 
@@ -47,10 +42,6 @@ public class StartUITest {
                 "New Name",
                 "1"};
         Input input = new StubInput(answers);
-//        UserAction[] actions = {
-//                new EditAction(output),
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new EditAction(output));
         actions.add(new ExitAction(output));
@@ -71,10 +62,6 @@ public class StartUITest {
                 item.getId(),
                 "1"};
         Input input = new StubInput(answers);
-//        UserAction[] actions = {
-//                new DeleteAction(output),
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new DeleteAction(output));
         actions.add(new ExitAction(output));
@@ -90,10 +77,6 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("Name");
         tracker.add(item);
-//        UserAction[] actions = {
-//                new ShowAction(output),
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ShowAction(output));
         actions.add(new ExitAction(output));
@@ -124,10 +107,6 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("Name");
         tracker.add(item);
-//        UserAction[] actions = {
-//                new FindByIdAction(output),
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new FindByIdAction(output));
         actions.add(new ExitAction(output));
@@ -159,10 +138,6 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("Name");
         tracker.add(item);
-//        UserAction[] actions = {
-//                new FindByIdAction(output),
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new FindByIdAction(output));
         actions.add(new ExitAction(output));
@@ -194,10 +169,6 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("Name");
         tracker.add(item);
-//        UserAction[] actions = {
-//                new FindByNameAction(output),
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new FindByNameAction(output));
         actions.add(new ExitAction(output));
@@ -227,9 +198,6 @@ public class StartUITest {
     public void whenExitAction() {
         Output output = new StubOutput();
         Tracker tracker = new Tracker();
-//        UserAction[] actions = {
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction(output));
 
@@ -255,9 +223,6 @@ public class StartUITest {
                 }
         );
         Tracker tracker = new Tracker();
-//        UserAction[] actions = {
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction(output));
 
@@ -283,9 +248,6 @@ public class StartUITest {
         }
         );
         Tracker tracker = new Tracker();
-//        UserAction[] actions = {
-//                new ExitAction(output)
-//        };
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction(output));
 

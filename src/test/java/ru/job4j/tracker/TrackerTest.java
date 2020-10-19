@@ -30,8 +30,11 @@ public class TrackerTest {
         tracker.add(item2);
         tracker.add(item3);
         tracker.add(item4);
-        Item[] result = tracker.findName("test");
-        Item[] expect = {item1, item2, item4};
+        List<Item> result = tracker.findName("test");
+        List<Item> expect = new ArrayList<>();
+        expect.add(item1);
+        expect.add(item2);
+        expect.add(item4);
         assertThat(result, is(expect));
     }
 

@@ -63,16 +63,16 @@ public class Tracker {
      * @return - возвращает копию массива this.items c заданным именем.
      */
 
-    public Item[] findName(String key) {
-        Item[] itemsWithEqualsName = new Item[items.size()];
+    public List<Item> findName(String key) {
+        List<Item> itemsWithEqualsName = new ArrayList<>();
         int size = 0;
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getName().equals(key)) {
-                itemsWithEqualsName[size] = items.get(i);
-                size++;
+                itemsWithEqualsName.add(items.get(size));
             }
+            size++;
         }
-        return Arrays.copyOf(itemsWithEqualsName, size);
+        return itemsWithEqualsName;
     }
 
     /**
