@@ -65,12 +65,10 @@ public class Tracker {
 
     public List<Item> findName(String key) {
         List<Item> itemsWithEqualsName = new ArrayList<>();
-        int size = 0;
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getName().equals(key)) {
-                itemsWithEqualsName.add(items.get(size));
+                itemsWithEqualsName.add(items.get(i));
             }
-            size++;
         }
         return itemsWithEqualsName;
     }
