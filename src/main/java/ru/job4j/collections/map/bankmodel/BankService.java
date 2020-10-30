@@ -9,26 +9,16 @@ public class BankService {
     private Map<User, List<Account>> users = new HashMap<>();
 
     public void addUser(User user) {
-        if (!users.containsKey(user)) {       //проверяем, если есть пользователь в системе, то не добавляем его снова
-            users.put(user, new ArrayList<Account>());      //создаем карту с пользователем и создаем пустой список счетов
-        }
+        users.putIfAbsent(user, new ArrayList<>());      //putIfAbsent проверяет, есть ли карта с таким ключем или нет, если нет, то вставляет переданную
     }
 
     public void addAccount(String passport, Account account) {
-            User findUser = findByPassport(passport);
-            if (users.get(findUser).size() == 0) {
-                users.get(findUser).add(account);
-            } else {
-                for (Account acc : users.get(findUser)) {
-                    if (!acc.getRequisite().equals(account.getRequisite())) {
+        User findUser = findByPassport(passport);
+        if (users.get(findUser).size() == 0 && findUser != null) {      //если коллекция с аккаунатми пустая и мы нашли паспорт пользователя
+            users.get(findUser).add(account);
+        } else if (findUser != null && !users.get(findUser).contains(account)) {     //если нашли паспорт пользователя и в коллекции с аккаунатми еще нет такого аккаунта
                         users.get(findUser).add(account);
-                    } else {
-                        System.out.println("Счет уже существует.");
-                    }
-                    break;
-                }
-            }
-
+        }
     }
 
     public User findByPassport(String passport) {
@@ -45,7 +35,7 @@ public class BankService {
     public Account findByRequisite(String passport, String requisite) {
         Account account = null;
         User findUser = findByPassport(passport);
-        if (findUser != null) {     //Или можно обрабоать try catch
+        if (findUser != null) {
             for (Account findAcc : users.get(findUser)) {
                 if (findAcc.getRequisite().equals(requisite)) {
                     account = findAcc;
@@ -60,8 +50,8 @@ public class BankService {
                                  String destPassport, String destRequisite, double amount) {
         boolean rst = false;
         if (users.get(findByPassport(srcPassport)).contains(findByRequisite(srcPassport, srcRequisite))
-        || users.get(findByPassport(destPassport)).contains(findByRequisite(destPassport, destRequisite))
-        || findByRequisite(srcPassport, srcRequisite).getBalance() >= amount) {
+        && users.get(findByPassport(destPassport)).contains(findByRequisite(destPassport, destRequisite))
+        && findByRequisite(srcPassport, srcRequisite).getBalance() >= amount) {
             double sentFrom = findByRequisite(srcPassport, srcRequisite).getBalance() - amount;
             double getTo = findByRequisite(destPassport, destRequisite).getBalance() + amount;
             findByRequisite(srcPassport, srcRequisite).setBalance(sentFrom);
