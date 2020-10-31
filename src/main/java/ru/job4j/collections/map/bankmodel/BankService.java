@@ -49,15 +49,19 @@ public class BankService {
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rst = false;
-        if (users.get(findByPassport(srcPassport)).contains(findByRequisite(srcPassport, srcRequisite))
-        && users.get(findByPassport(destPassport)).contains(findByRequisite(destPassport, destRequisite))
-        && findByRequisite(srcPassport, srcRequisite).getBalance() >= amount) {
-            double sentFrom = findByRequisite(srcPassport, srcRequisite).getBalance() - amount;
-            double getTo = findByRequisite(destPassport, destRequisite).getBalance() + amount;
-            findByRequisite(srcPassport, srcRequisite).setBalance(sentFrom);
-            findByRequisite(destPassport, destRequisite).setBalance(getTo);
-            rst = true;
-        }
+//        if (users.get(findByPassport(srcPassport)).contains(findByRequisite(srcPassport, srcRequisite))
+//        && users.get(findByPassport(destPassport)).contains(findByRequisite(destPassport, destRequisite))
+//        && findByRequisite(srcPassport, srcRequisite).getBalance() >= amount) {
+            if (findByRequisite(srcPassport, srcRequisite) != null
+                    && findByRequisite(destPassport, destRequisite) != null
+                    && findByRequisite(srcPassport, srcRequisite).getBalance() >= amount) {
+                double sentFrom = findByRequisite(srcPassport, srcRequisite).getBalance() - amount;
+                double getTo = findByRequisite(destPassport, destRequisite).getBalance() + amount;
+                findByRequisite(srcPassport, srcRequisite).setBalance(sentFrom);
+                findByRequisite(destPassport, destRequisite).setBalance(getTo);
+                rst = true;
+            }
+//        }
         return rst;
     }
 }
