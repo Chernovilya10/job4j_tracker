@@ -1,9 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Tracker {
     private final List<Item> items = new ArrayList<>();
@@ -130,5 +127,19 @@ public class Tracker {
             items.remove(index);
         }
         return rst;
+    }
+
+    /**
+     * сортировака по возрастанию
+     */
+    public void sortByNameIncrease() {
+        Collections.sort(this.items, new SortByNameComparator());
+    }
+
+    /**
+     * сортировка по убыванию
+     */
+    public void sortByNameDecrease() {
+        Collections.sort(this.items, Collections.reverseOrder(new SortByNameComparator()));
     }
 }

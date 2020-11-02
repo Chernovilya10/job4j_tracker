@@ -141,6 +141,8 @@ public class StartUI {
         actions.add(new DeleteAction(output));
         actions.add(new FindByIdAction(output));
         actions.add(new FindByNameAction(output));
+        actions.add(new SortByNameIncreaseAction(output));      //Действие по сортировке по возрастанию
+        actions.add(new SortByNameDecreaseAction(output));      //Действие по сортировке по убыванию
         actions.add(new ExitAction(output));
 
         StartUI startUI = new StartUI(output);
