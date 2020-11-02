@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -88,5 +89,45 @@ public class TrackerTest {
             String id = item3.getId();
             tracker.delete(id);
             assertThat(tracker.findById(id), is(nullValue()));
+    }
+
+    @Test
+    public void whenSortIncrease() {
+            Tracker tracker = new Tracker();
+            Item item1 = new Item("VV");
+            Item item2 = new Item("BB");
+            Item item3 = new Item("AA");
+            Item item4 = new Item("MM");
+            tracker.add(item1);
+            tracker.add(item2);
+            tracker.add(item3);
+            tracker.add(item4);
+            tracker.sortByNameIncrease();
+            List<Item> expected = Arrays.asList(
+                    item3,
+                    item2,
+                    item4,
+                    item1);
+            assertThat(tracker.findAll(), is(expected));
+    }
+
+    @Test
+    public void whenSortDecrease() {
+            Tracker tracker = new Tracker();
+            Item item1 = new Item("VV");
+            Item item2 = new Item("BB");
+            Item item3 = new Item("AA");
+            Item item4 = new Item("MM");
+            tracker.add(item1);
+            tracker.add(item2);
+            tracker.add(item3);
+            tracker.add(item4);
+            tracker.sortByNameDecrease();
+            List<Item> expected = Arrays.asList(
+                    item1,
+                    item4,
+                    item2,
+                    item3);
+            assertThat(tracker.findAll(), is(expected));
     }
 }
