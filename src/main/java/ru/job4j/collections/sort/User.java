@@ -36,14 +36,18 @@ public class User implements Comparable<User> {
     @Override
     public int compareTo(User anotherUser) {
         int rsl = this.name.compareTo(anotherUser.name);        //сравниваем имена
-        if (rsl != 0) {         //если отличается от нуля, возвращем или -1 или 1
-            return rsl;
+        if (rsl == 0) {
+            rsl = this.age - anotherUser.getAge();
         }
-        rsl = this.age - anotherUser.getAge();      //проверяем возраст
-        if (rsl != 0) {                     //если отличен от нуля, то сортируем по возрасту
-            rsl = rsl / Math.abs(this.age - anotherUser.getAge());      //соритируем в зависимоти от возраста
-            return rsl;
-        }
-        return 0;
+        return rsl;
+//        if (rsl != 0) {         //если отличается от нуля, возвращем или -1 или 1
+//            return rsl;
+//        }
+//        rsl = this.age - anotherUser.getAge();      //проверяем возраст
+//        if (rsl != 0) {                     //если отличен от нуля, то сортируем по возрасту
+//            rsl = rsl / Math.abs(this.age - anotherUser.getAge());      //соритируем в зависимоти от возраста
+//            return rsl;
+//        }
+//        return 0;
     }
 }
