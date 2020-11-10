@@ -46,15 +46,8 @@ public class FirstNumberSort implements Comparator<String> {
 
         String[] firstArray = first.split("\\.");
         String[] secondArray = second.split("\\.");
-        int firstNumber = 0;
-        int secondNumber = 0;
-        for (int i = 0; i < Math.min(firstArray.length, secondArray.length); i++) {
-            firstNumber = Integer.parseInt(firstArray[i]);
-            secondNumber = Integer.parseInt(secondArray[i]);
-            if (firstNumber != secondNumber) {
-                break;
-            }
-        }
+            int firstNumber = Integer.parseInt(firstArray[0]);
+            int secondNumber = Integer.parseInt(secondArray[0]);
             return Integer.compare(firstNumber, secondNumber);
     }
 }
