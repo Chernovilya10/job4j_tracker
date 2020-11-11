@@ -8,7 +8,11 @@ public class College {
         Student student = new Student();
         student.setFio("Chenov Ilia Yurievich");
         student.setGroupNumber("IZ-10-1");
-        Date startDate = new Date(110, Calendar.SEPTEMBER, 1);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 110);
+        cal.set(Calendar.MONTH, Calendar.SEPTEMBER);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        Date startDate = cal.getTime();
         student.setStartDate(startDate);
 
         System.out.println("Name of the student : " + student.getFio()
