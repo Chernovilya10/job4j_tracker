@@ -1,5 +1,6 @@
 package ru.job4j.collections.map;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -13,15 +14,15 @@ import java.util.TreeSet;
 public class Article {
     public static boolean generateBy(String origin, String line) {
         boolean rst = false;
-        String withoutSymbolsOrigin = origin.replaceAll("[^A-Za-zА-Яа-я0-9-\\s]", ""); //убираем все символы кроме букв, цифр и пробела (\\s)
+        String withoutSymbolsOrigin = origin.replaceAll("\\p{P}", ""); // ("[^A-Za-zА-Яа-я0-9-\s]", "") убираем все символы кроме букв, цифр и пробела (\\s)
         String[] originArray = withoutSymbolsOrigin.split(" ");
-        Set<String> originSet = new TreeSet<>();
+        Set<String> originSet = new HashSet<>();
         for (String o : originArray) {
             originSet.add(o);
         }
         String withoutSymbolsLine = line.replaceAll("[^A-Za-zА-Яа-я0-9-\\s]", ""); //убираем все символы кроме букв, цифр и пробела (\\s)
         String[] lineArray = withoutSymbolsLine.split(" ");
-        Set<String> lineSet = new TreeSet<>();
+        Set<String> lineSet = new HashSet<>();
         for (String l : lineArray) {
             lineSet.add(l);
         }
